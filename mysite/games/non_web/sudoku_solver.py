@@ -24,7 +24,7 @@ def begin(puzzle):
                     rows[y].add(num)
                     columns[x].add(num)
                     sections[x//3 + (y//3)*3].add(num)
-    return mutable, sections, rows, columns
+    return (mutable, sections, rows, columns)
 
 
 def solve_single(puzzle, seen=None):
@@ -63,8 +63,8 @@ def solve_single(puzzle, seen=None):
 
 
 def sudoku_solver(puzzle):
-    print(puzzle)
-    return solve_single(puzzle)
+    solved = solve_single(puzzle)
+    return solved
 
 
 if __name__ == "__main__":
