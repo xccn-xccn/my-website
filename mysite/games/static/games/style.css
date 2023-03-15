@@ -8,3 +8,13 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.sudoku{
+  display: grid;
+  grid-template-columns: repeat(9, 9vmin);
+  grid-template-rows: repeat(9, 9vmin);
+}
+
+.sudoku_cell{
+  border-color: darkcyan;
+}

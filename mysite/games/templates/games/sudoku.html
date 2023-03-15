@@ -3,15 +3,20 @@
 {% block content %}
     <br>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ forms }}
-        <input type="submit" value="Submit">
-    </form>
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+                <div class="sudoku">
+                    {% for sudoku_cell in forms %}
+                        {{ sudoku_cell }}
+                    {% endfor %}
+                </div>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    
 
-    {% if solved_sudoku %}
-        {{ solved_sudoku }}
-    {% endif %}
+    {{ solved_sudoku }}
 
-
+    {{ solved }}
 {% endblock content %}
