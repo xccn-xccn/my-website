@@ -13,8 +13,11 @@ input[type=number] {
   display: grid;
   grid-template-columns: repeat(9, 9vmin);
   grid-template-rows: repeat(9, 9vmin);
+  background-color: blue;
 }
 
 .sudoku_cell{
   border-color: darkcyan;
+  background-color: rgba(0, 203, 105, 0.562);
+  color: white;
 }

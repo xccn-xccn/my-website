@@ -18,8 +18,14 @@ def sudoku(request):
     }
     context["solved"] = "NO"
     if request.method == "POST":
+        # data = {
+        #     'form-TOTAL_FORMS': '81',
+        #     'form-INITIAL_FORMS': '0',
+        #     }
         context["solved"] = "kinda"
         SudokuForm = SudokuFormSet(request.POST)
+        print (SudokuForm.non_form_errors())
+        print(SudokuForm.is_valid())
         if SudokuForm.is_valid():
             context["solved"] = "yes"
             messages.success(request, "yay")
@@ -34,7 +40,10 @@ def sudoku(request):
             context["solved_sudoku"] = solved_sudoku
             context["solved"] = "YES"
             # return render("sudoku", {"solved_sudoku": solved_sudoku})
-    # else:
-    #     SudokuForm = SudokuFormSet()
-    context["forms"] = SudokuFormSet()
+        
+        
+
+    else:
+         SudokuForm = SudokuFormSet()
+    context["forms"] = SudokuForm
     return render(request, "games/sudoku.html", context)

@@ -3,11 +3,13 @@
 {% block content %}
     <br>
 
-    <div class="container">
+    <div class="container bg-primary">
         <form method="post">
             {% csrf_token %}
+            {{ forms.management_form }}
                 <div class="sudoku">
                     {% for sudoku_cell in forms %}
+                        {{ field.errors}}
                         {{ sudoku_cell }}
                     {% endfor %}
                 </div>
@@ -15,8 +17,9 @@
         </form>
     </div>
     
-
     {{ solved_sudoku }}
-
+    
     {{ solved }}
+
+    <!-- {{ forms.errors }} {{ forms.non_field_errors }} -->
 {% endblock content %}
