@@ -11,23 +11,18 @@ def home(request):
     return render(request, "games/home.html", context)
 
 
-def sudoku(request): #TODO fix current error, create Quick enter, make input red but new same, make copy quick enter, make generator
+def sudoku(request): #TODO create Quick enter, make input red but new same, make copy quick enter, make generator
     SudokuFormSet = formset_factory(SolveSudokuForm, extra=81)
     context = {
         "quick_enter_form" : QuickEnterForm()
     }
     context["solved"] = "NO"
-    if request.method == "POST":
-        # data = {
-        #     'form-TOTAL_FORMS': '81',
-        #     'form-INITIAL_FORMS': '0',
-        #     }
+    if request.method == "POST" and "sudoku_submit" in request.POST:
         context["solved"] = "kinda"
         SudokuForm = SudokuFormSet(request.POST)
         print (SudokuForm.non_form_errors())
         print(SudokuForm.is_valid())
         if SudokuForm.is_valid():
-            
             context["solved"] = "yes"
             messages.success(request, "yay")
             grid = []

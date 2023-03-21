@@ -29,13 +29,13 @@
             {% endif %}
         </div>
                 
-            <input type="submit" value="Submit" class="sudoku-submit">
+            <input type="submit" value="Submit" class="sudoku-submit" name="sudoku_submit">
         </form>
 
         <form method="post">
             {% csrf_token %}
             {{ quick_enter_form }}
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit" name="quick_enter">
         </form>
     </div>
     
