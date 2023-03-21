@@ -19,7 +19,12 @@ class SolveSudokuForm(forms.Form):
         max_value=9, 
         max_digits=1, 
         required=False, 
-        initial=0, 
-        label="", 
-        widget=forms.NumberInput(attrs={'class': 'sudoku_cell'})
+        label="",
+        widget=forms.NumberInput(attrs={'class': 'sudoku-cell'})
     )
+
+
+class QuickEnterForm(forms.Form):
+    sudoku = forms.CharField(max_length=81, min_length=81, label="Quick Enter")
+
+#483921657967345821251876493548132976729564138136798245372689514814253769695417382

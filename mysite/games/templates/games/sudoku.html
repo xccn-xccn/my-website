@@ -2,22 +2,44 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <br>
-
-    <div class="container bg-primary">
+    <nav>
+        <h1>Sudoku Page</h1>
+        <a href="{% url 'home' %}">Home</a>
+    </nav>
+    <div class="container-flex sudoku-container">
+        
         <form method="post">
             {% csrf_token %}
-            {{ forms.management_form }}
+            {{ sudoku_forms.management_form }} 
+            {{ sudoku_forms.errors}} 
+        <div class="d-flex justify-content-center">
+            <div class="sudoku">
+                {% for sudoku_cell in sudoku_forms %}
+                    {{ sudoku_cell }}
+                {% endfor %}
+            </div>
+            {% if solved_sudoku %}
                 <div class="sudoku">
-                    {% for sudoku_cell in forms %}
-                        {{ field.errors}}
-                        {{ sudoku_cell }}
+                    {% for char in solved_sudoku %}
+                        <div class="sudoku-cell">
+                            {{ char }}
+                        </div>
                     {% endfor %}
                 </div>
+            {% endif %}
+        </div>
+                
+            <input type="submit" value="Submit" class="sudoku-submit">
+        </form>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ quick_enter_form }}
             <input type="submit" value="Submit">
         </form>
     </div>
     
-    {{ solved_sudoku }}
+    <!-- {{ solved_sudoku }} -->
     
     {{ solved }}
 

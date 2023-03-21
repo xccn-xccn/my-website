@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.forms import formset_factory
-from .forms import SolveSudokuForm
+from .forms import SolveSudokuForm, QuickEnterForm
 from .non_web.sudoku_solver import sudoku_solver
 
 def home(request):
@@ -11,10 +11,10 @@ def home(request):
     return render(request, "games/home.html", context)
 
 
-def sudoku(request):
+def sudoku(request): #TODO fix current error, create Quick enter, make input red but new same, make copy quick enter, make generator
     SudokuFormSet = formset_factory(SolveSudokuForm, extra=81)
     context = {
-
+        "quick_enter_form" : QuickEnterForm()
     }
     context["solved"] = "NO"
     if request.method == "POST":
@@ -27,6 +27,7 @@ def sudoku(request):
         print (SudokuForm.non_form_errors())
         print(SudokuForm.is_valid())
         if SudokuForm.is_valid():
+            
             context["solved"] = "yes"
             messages.success(request, "yay")
             grid = []
@@ -37,13 +38,18 @@ def sudoku(request):
                     grid.append([])
                 grid[-1].append(int(square))
             solved_sudoku = sudoku_solver(grid)
-            context["solved_sudoku"] = solved_sudoku
+            print(solved_sudoku)
+            print([x for row in solved_sudoku for x in row])
+            flattened_solved = [str(x) for row in solved_sudoku for x in row]
+            context["solved_sudoku"] = "".join(flattened_solved)
             context["solved"] = "YES"
+            for form, square in zip(SudokuForm, flattened_solved):
+                form.fields['square'].initial = square
+            print([x.cleaned_data for x in SudokuForm])
             # return render("sudoku", {"solved_sudoku": solved_sudoku})
-        
         
 
     else:
          SudokuForm = SudokuFormSet()
-    context["forms"] = SudokuForm
+    context["sudoku_forms"] = SudokuForm
     return render(request, "games/sudoku.html", context)

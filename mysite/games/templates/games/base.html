@@ -19,7 +19,7 @@
     <body>
         {% for message in messages %}
             <div class="m-2 alert alert-{{ message.tags }} ">
-                {{ message }}
+                {{ message }} 
             </div>
         {% endfor %}
         {% block content %}{% endblock %}

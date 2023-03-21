@@ -4,20 +4,83 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+:root {
+  --main1: #1e3d58;
+  --main2: #057DCD;
+  --main3: #43B0f1;
+  --main4: #36fae0;
+}
+
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
 }
 
-.sudoku{
+nav {
+  color: #ffffff;
+  margin-bottom: 0;
+}
+
+.sudoku {
   display: grid;
   grid-template-columns: repeat(9, 9vmin);
   grid-template-rows: repeat(9, 9vmin);
-  background-color: blue;
+  background-color: var(--main1);
+  margin-right: 6vmin;
+  /* gap: 1px; */
+  /* margin: 0 auto; */
+  /* text-align: center; */
 }
 
-.sudoku_cell{
-  border-color: darkcyan;
-  background-color: rgba(0, 203, 105, 0.562);
+.sudoku-cell {
+  border-color: var(--main1);
+  background-color: var(--main2);
+  /* centres the output */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* centres the input */
+  text-align: center;
+
+  font-size: 3.5vmin;
+  border-width: 1px;
+  border-style: solid;
+  /* margin: auto; */
+  /* color: white; */
+}
+
+.sudoku-cell:focus {
+  background-color: var(--main3);
+  border-color: var(--main3);
+}
+
+.sudoku-container {
+  background-color: var(--main1);
+  margin: auto;
+}
+
+.sudoku-submit {
+  background-color: var(--main3);
+}
+
+ p {
+  color: var(--main4)
+ }
+
+ 
+@media (min-width: 2030px) {
+  .d-sd-flex {
+    display: flex !important;
+  }
+}
+ 
+input {
+  background-color: var(--main3);
+  
+}
+
+* {
+  background-color: var(--main1);
   color: white;
 }
