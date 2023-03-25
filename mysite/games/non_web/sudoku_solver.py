@@ -10,20 +10,19 @@ def begin(puzzle):
     mutable = []
     sections, rows, columns = [{k: set() for k in range(9)} for _ in range(3)]
     if len(puzzle) != 9:
-        return False
+        raise Exception("Sudoku has wrong dimensions")
     for y, line in enumerate(puzzle):
-        if len(puzzle) != 9:
-            return False
         for x, num in enumerate(line):
-            if num > 9 or num < 0 or (num != 0 and not valid(y, x, puzzle, {}, {}, {})):
-                raise Exception
+            if len(puzzle) != 9:
+                raise Exception("Sudoku has wrong dimensions")
+            if num == 0:
+                mutable.append((y, x))
+            elif num > 9 or num < 0 or num in rows[y] or num in columns[x] or num in sections[x//3 + (y//3)*3]:
+                raise Exception("Invalid sudoku")
             else:
-                if num == 0:
-                    mutable.append((y, x))
-                else:
-                    rows[y].add(num)
-                    columns[x].add(num)
-                    sections[x//3 + (y//3)*3].add(num)
+                rows[y].add(num)
+                columns[x].add(num)
+                sections[x//3 + (y//3)*3].add(num)
     return (mutable, sections, rows, columns)
 
 
@@ -31,6 +30,8 @@ def solve_single(puzzle, seen=None):
     if seen == None:
         seen = set()
     mutable, sections, rows, columns = begin(puzzle)
+    if not mutable:
+        return puzzle #sudoku is already solved
     index = 0
     seen = set()
     while True:
@@ -45,7 +46,8 @@ def solve_single(puzzle, seen=None):
 
         while success == False and puzzle[y][x] < 9:
             puzzle[y][x] += 1
-            success = valid(y, x, puzzle, sections[sections_index], rows[y], columns[x])
+            success = valid(
+                y, x, puzzle, sections[sections_index], rows[y], columns[x])
         if success:
             square = puzzle[y][x]
             sections[sections_index].add(square)
@@ -68,7 +70,7 @@ def sudoku_solver(puzzle):
 
 
 if __name__ == "__main__":
-    # TODO make it raise error when there are multiple solutions (or any invalids) 
+    # TODO make it raise error when there are multiple solutions (or any invalids)
     start = perf_counter()
     print(solve_single([[0, 0, 0, 0, 0, 2, 7, 5, 0],
                         [0, 1, 8, 0, 9, 0, 0, 0, 0],

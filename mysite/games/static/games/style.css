@@ -64,20 +64,20 @@ nav {
   background-color: var(--main3);
 }
 
- p {
+p {
   color: var(--main4)
- }
+}
 
- 
+
 @media (min-width: 2030px) {
   .d-sd-flex {
     display: flex !important;
   }
 }
- 
+
 input {
   background-color: var(--main3);
-  
+
 }
 
 * {
