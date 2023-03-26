@@ -11,7 +11,7 @@
         <form method="post">
             {% csrf_token %}
             {{ sudoku_forms.management_form }} 
-            {{ sudoku_forms.errors}} 
+            {{ sudoku_forms.errors }} 
         <div class="d-flex justify-content-center">
             <div class="sudoku">
                 {% for sudoku_cell in sudoku_forms %}

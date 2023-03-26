@@ -6,6 +6,8 @@ def valid(y, x, puzzle, section, row, column):
     return value not in row and value not in column and value not in section
 
 
+
+
 def begin(puzzle):
     mutable = []
     sections, rows, columns = [{k: set() for k in range(9)} for _ in range(3)]
@@ -18,7 +20,7 @@ def begin(puzzle):
             if num == 0:
                 mutable.append((y, x))
             elif num > 9 or num < 0 or num in rows[y] or num in columns[x] or num in sections[x//3 + (y//3)*3]:
-                raise Exception("Invalid sudoku")
+                raise Invalid_Sudoku
             else:
                 rows[y].add(num)
                 columns[x].add(num)
@@ -29,7 +31,12 @@ def begin(puzzle):
 def solve_single(puzzle, seen=None):
     if seen == None:
         seen = set()
-    mutable, sections, rows, columns = begin(puzzle)
+    
+    try:
+        mutable, sections, rows, columns = begin(puzzle)
+    except Invalid_Sudoku:
+        return "Invalid Sudoku"
+    
     if not mutable:
         return puzzle #sudoku is already solved
     index = 0
@@ -68,6 +75,8 @@ def sudoku_solver(puzzle):
     solved = solve_single(puzzle)
     return solved
 
+class Invalid_Sudoku(Exception):
+    pass
 
 if __name__ == "__main__":
     # TODO make it raise error when there are multiple solutions (or any invalids)
