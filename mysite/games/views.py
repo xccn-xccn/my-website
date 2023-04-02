@@ -26,32 +26,13 @@ def sudoku(request):  # TODO fix current error, make input red but new same, mak
             SudokuForm = SudokuFormSet(request.POST)
             print("form with validation created")
             if SudokuForm.is_valid():
-                # valid_sudoku(SudokuForm)
-
-                puzzle = [[] for _ in range(9)]
-                invalid = False
-                for count, square in enumerate(SudokuForm):
-                    puzzle[count // 9].append(square)
-                sections, rows, columns = [{k: set() for k in range(9)} for _ in range(3)]
-                for y, line in enumerate(puzzle):
-                    for x, square in enumerate(line):
-                        num = square.cleaned_data.get("square", 0)
-                        if num == 0:
-                            continue
-                        elif num > 9 or num < 0 or num in rows[y] or num in columns[x] or num in sections[x//3 + (y//3)*3]:
-                            invalid = True
-                            for f in square:
-                                print(type(f), "/n/n")
-                                f.field.widget.attrs['class'] = f.field.widget.attrs.get('class', '') + ' is-invalid'
-                        else:
-                            rows[y].add(num)
-                            columns[x].add(num)
-                            sections[x//3 + (y//3)*3].add(num)
-
-                print("form is valid")
-                messages.success(request, "Sudoku Solved")
-                result = solve_sudoku(SudokuForm)
-                context["solved_sudoku"] = result
+                SudokuForm, valid = valid_sudoku(SudokuForm)
+                if valid:
+                    result = solve_sudoku(SudokuForm)
+                    messages.success(request, "Sudoku Solved")
+                    context["solved_sudoku"] = result
+                else:
+                    messages.error(request, "Invalid Sudoku")
             else:
                 messages.error(request, "Invalid Sudoku")
         elif "quick_enter" in request.POST:

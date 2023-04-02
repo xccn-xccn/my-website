@@ -52,12 +52,14 @@ nav {
 
 .sudoku-cell:focus {
   background-color: var(--main3);
+  background-color: rgb(30, 0, 255);
   border-color: var(--main3);
+
 }
 
-.sudoku-cell.is-invalid {
-  background-color: #a70000 !important; 
-  color: #ff5252
+.sudoku-cell.invalid {
+  background-color: #fc1010;
+  color: #a70000;
 }
 
 .sudoku-container {
@@ -88,3 +90,8 @@ input {
   background-color: var(--main1);
   color: white;
 }
+
+/* input:hover {
+  visibility: hidden !important;
+  color: black;
+} */
