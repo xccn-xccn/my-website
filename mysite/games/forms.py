@@ -10,6 +10,17 @@ def all_number(value):
 
         # raise ValidationError(_('%(value)s is not just numbers'), params={"value": value}, code="invalid")
 
+def QuickEnterValidator(value):
+    no_spaces = "".join(value.split())
+    print(type(no_spaces), no_spaces, len(no_spaces))
+    if len(no_spaces) != 81:
+        raise ValidationError(_(f"Quick Enter is Wrong Length ({len(no_spaces)})"), code="Invalid")
+    elif not no_spaces.isdigit():
+        raise ValidationError(_("Quick Enter contains non numerical characters"), code="Invalid")
+
+
+
+
 def validate_sudoku(puzzle):
     sections, rows, columns = [{k: set() for k in range(9)} for _ in range(3)]
     if len(puzzle) != 9:
@@ -38,6 +49,14 @@ class SolveSudokuForm(forms.Form):
         widget=forms.NumberInput(attrs={'class': 'sudoku-cell'})
     )
 
+
+class QuickEnterForm(forms.Form):
+    sudoku = forms.CharField(
+        validators=[QuickEnterValidator],
+        label="Quick Enter",
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'quick-enter'},)
+    )
 
 SudokuFormSet = formset_factory(SolveSudokuForm, extra=81)
 
@@ -71,7 +90,6 @@ class SudokuFormsetValid(SudokuFormSet):
 
 
 
-class QuickEnterForm(forms.Form):
-    sudoku = forms.CharField(max_length=81, min_length=81, label="Quick Enter")
+
 
 #483921657967345821251876493548132976729564138136798245372689514814253769695417382

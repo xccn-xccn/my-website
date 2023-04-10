@@ -16,7 +16,17 @@
                 {% for sudoku_cell in sudoku_forms %}
                     {{ sudoku_cell }}
                 {% endfor %}
+                <input type="submit" value="Submit" class="sudoku-submit" name="sudoku_submit">
+
             </div>
+            
+            <!-- quick_enter -->
+            <form method="post" class="quick-enter" action="{% url 'quickenter' %}">
+                {% csrf_token %}
+                {{ quick_enter }}
+                <input type="submit" name="quick_enter">Submit</input>
+            </form>
+
             {% if solved_sudoku %}
                 <div class="sudoku">
                     {% for char in solved_sudoku %}
@@ -28,14 +38,9 @@
             {% endif %}
         </div>
                 
-            <input type="submit" value="Submit" class="sudoku-submit" name="sudoku_submit">
         </form>
 
-        <form method="post">
-            {% csrf_token %}
-            {{ quick_enter }}
-            <input type="submit" value="Submit" name="quick_enter">
-        </form>
+        
     </div>
     
     <!-- {{ solved_sudoku }} -->

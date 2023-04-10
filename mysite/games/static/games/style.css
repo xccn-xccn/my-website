@@ -52,7 +52,7 @@ nav {
 
 .sudoku-cell:focus {
   background-color: var(--main3);
-  background-color: rgb(30, 0, 255);
+  background-color: rgb(200, 255, 1);
   border-color: var(--main3);
 
 }
@@ -82,13 +82,19 @@ p {
   }
 }
 
+form.quick-enter * {
+  display: inline;
+  width: 9vmin;
+  height: 2vmin;
+}
+
 input {
   background-color: var(--main3);
 }
 
 * {
   background-color: var(--main1);
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 /* input:hover {
