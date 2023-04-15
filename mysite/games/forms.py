@@ -12,6 +12,7 @@ def all_number(value):
 
 def QuickEnterValidator(value):
     no_spaces = "".join(value.split())
+    print("quickenter validating")
     print(type(no_spaces), no_spaces, len(no_spaces))
     if len(no_spaces) != 81:
         raise ValidationError(_(f"Quick Enter is Wrong Length ({len(no_spaces)})"), code="Invalid")
@@ -53,9 +54,9 @@ class SolveSudokuForm(forms.Form):
 class QuickEnterForm(forms.Form):
     sudoku = forms.CharField(
         validators=[QuickEnterValidator],
-        label="Quick Enter",
-        required=False,
-        widget=forms.TextInput(attrs={'class': 'quick-enter'},)
+        label="",
+        required=True,
+        # widget=forms.TextInput(attrs={'class': 'quick-enter'},)
     )
 
 SudokuFormSet = formset_factory(SolveSudokuForm, extra=81)

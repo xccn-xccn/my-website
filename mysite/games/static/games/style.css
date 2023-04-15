@@ -23,10 +23,13 @@ nav {
 
 .sudoku {
   display: grid;
+  width: fit-content;
+  height: fit-content;
   grid-template-columns: repeat(9, 9vmin);
   grid-template-rows: repeat(9, 9vmin);
   background-color: var(--main1);
   margin: 6vmin;
+  border: 3px solid orange;
   /* gap: 1px; */
   /* margin: 0 auto; */
   /* text-align: center; */
@@ -52,7 +55,7 @@ nav {
 
 .sudoku-cell:focus {
   background-color: var(--main3);
-  background-color: rgb(200, 255, 1);
+  background-color: rgb(255, 55, 55);
   border-color: var(--main3);
 
 }
@@ -82,14 +85,31 @@ p {
   }
 }
 
-form.quick-enter * {
-  display: inline;
+.quick-enter * {
+  /* display: flex; */
+  /* margin: 0px; */
   width: 9vmin;
-  height: 2vmin;
+  height: 6vmin;
+  color: #00a761;
+}
+
+.quick-enter {
+  /* margin: 5vmin; */
+  /* display: flex; */
+  /* width: 9vmin;
+  height: 2vmin; */
+  table-layout: fixed;
+  /* width: 100%; */
+  margin-left: 0px;
+  height: fit-content;
+  padding: 0;
+  border: 6px solid var(--main3);
+  background-color: #a70000;
 }
 
 input {
   background-color: var(--main3);
+  /* background-color: #00a761; */
 }
 
 * {
@@ -97,6 +117,9 @@ input {
   color: rgb(255, 255, 255);
 }
 
+form {
+  display: contents !important;
+}
 /* input:hover {
   visibility: hidden !important;
   color: black;

@@ -1,31 +1,44 @@
 {% extends "games/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+    {{ quick_enter.errors }}
+
     <br>
     <nav>
         <h1>Sudoku Page</h1>
         <a href="{% url 'home' %}">Home</a>
+        
     </nav>
     <div class="container-flex sudoku-container">
         
-        <form method="post">
-            {% csrf_token %}
-            {{ sudoku_forms.management_form }} 
-        <div class="d-sd-flex justify-content-center">
-            <div class="sudoku">
-                {% for sudoku_cell in sudoku_forms %}
-                    {{ sudoku_cell }}
-                {% endfor %}
-                <input type="submit" value="Submit" class="sudoku-submit" name="sudoku_submit">
-
-            </div>
-            
-            <!-- quick_enter -->
-            <form method="post" class="quick-enter" action="{% url 'quickenter' %}">
+        
+        <section class="d-sd-flex justify-content-center">
+            <form method="post">
                 {% csrf_token %}
-                {{ quick_enter }}
-                <input type="submit" name="quick_enter">Submit</input>
+                {{ sudoku_forms.management_form }} 
+                <div class="sudoku">
+                    {% for sudoku_cell in sudoku_forms %}
+                        {{ sudoku_cell }}
+                    {% endfor %}
+                    <input type="submit" value="Submit" class="sudoku-submit" name="sudoku_submit">
+
+                </div>
             </form>
+            <!-- quick_enter -->
+            <form method="post" class="quick-enter">
+                {% csrf_token %}
+                <!-- <legend>Quick Enter</legend> -->
+                <!-- <span class="quick-enter"> -->
+                    <table class="quick-enter">
+                        <tr>
+                            <td>{{ quick_enter.as_div }}</td>
+                            <td><input type="submit" name="quick_enter"></input></td>
+                        </tr>
+                    </table>
+                <!-- </span> -->
+            </form>
+
+            
 
             {% if solved_sudoku %}
                 <div class="sudoku">
@@ -36,11 +49,15 @@
                     {% endfor %}
                 </div>
             {% endif %}
-        </div>
-                
-        </form>
+        </section>   
 
+            {% if 0 %}
+                <div class="sudoku">
+
+                </div>
+            {% endif %}
         
+
     </div>
     
     <!-- {{ solved_sudoku }} -->
