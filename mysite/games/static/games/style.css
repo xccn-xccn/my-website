@@ -28,7 +28,7 @@ nav {
   grid-template-columns: repeat(9, 9vmin);
   grid-template-rows: repeat(9, 9vmin);
   background-color: var(--main1);
-  margin: 6vmin;
+  margin: 0;
   border: 3px solid orange;
   /* gap: 1px; */
   /* margin: 0 auto; */
@@ -38,6 +38,7 @@ nav {
 .sudoku-cell {
   border-color: var(--main1);
   background-color: var(--main2);
+
   /* centres the output */
   display: flex;
   justify-content: center;
@@ -53,9 +54,10 @@ nav {
   /* color: white; */
 }
 
+
 .sudoku-cell:focus {
   background-color: var(--main3);
-  background-color: rgb(255, 55, 55);
+  background-color: rgb(0, 247, 255);
   border-color: var(--main3);
 
 }
@@ -67,7 +69,14 @@ nav {
 
 .sudoku-container {
   background-color: var(--main1);
+  display: flex;
+  flex-wrap: wrap;
   margin: auto;
+  justify-content: space-around;
+  align-items: center;
+
+  border: 3px solid orange;
+
 }
 
 .sudoku-submit {
@@ -78,6 +87,13 @@ p {
   color: var(--main4)
 }
 
+.function-container {
+  border: 3px solid orange;
+  margin-bottom: 50px;
+
+  position: relative;
+  top: -8vmin;
+}
 
 @media (min-width: 2030px) {
   .d-sd-flex {

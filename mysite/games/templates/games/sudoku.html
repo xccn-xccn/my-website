@@ -9,10 +9,10 @@
         <a href="{% url 'home' %}">Home</a>
         
     </nav>
-    <div class="container-flex sudoku-container">
+    <div class="sudoku-container">
         
         
-        <section class="d-sd-flex justify-content-center">
+        <!-- <section class="flex justify-content-center"> -->
             <form method="post">
                 {% csrf_token %}
                 {{ sudoku_forms.management_form }} 
@@ -25,18 +25,21 @@
                 </div>
             </form>
             <!-- quick_enter -->
-            <form method="post" class="quick-enter">
-                {% csrf_token %}
-                <!-- <legend>Quick Enter</legend> -->
-                <!-- <span class="quick-enter"> -->
-                    <table class="quick-enter">
-                        <tr>
-                            <td>{{ quick_enter.as_div }}</td>
-                            <td><input type="submit" name="quick_enter"></input></td>
-                        </tr>
-                    </table>
-                <!-- </span> -->
-            </form>
+            <div class="function-container">
+                <form method="post" class="quick-enter">
+                    {% csrf_token %}
+                    <!-- <legend>Quick Enter</legend> -->
+                    <!-- <span class="quick-enter"> -->
+                        <table class="quick-enter">
+                            <tr>
+                                <td>{{ quick_enter.as_div }}</td>
+                                <td><input type="submit" name="quick_enter"></input></td>
+                            </tr>
+                        </table>
+                    <!-- </span> -->
+                </form>
+            </div>
+            
 
             
 
@@ -49,7 +52,7 @@
                     {% endfor %}
                 </div>
             {% endif %}
-        </section>   
+        <!-- </section>    -->
 
             {% if 0 %}
                 <div class="sudoku">

@@ -26,7 +26,7 @@ def home(request):
 #     return render(request,"games/sudoku.html", {"quick_enter": QuickEnterForm()})
 
 # cd .\Documents\programming\my-website\mysite\
-def sudoku(request):  # TODO  TF is going on, if decimal number, allow spaces in quick enter, make input red but new same, make copy quick enter, make generator,
+def sudoku(request):  # TODO   if decimal number, allow spaces in quick enter, make input red but new same, make copy quick enter, make generator,
     SudokuFormSet = formset_factory(SolveSudokuForm, extra=81)
     SudokuForm = SudokuFormSet()
     QuickEnter = QuickEnterForm()

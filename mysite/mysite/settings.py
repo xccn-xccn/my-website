@@ -24,7 +24,7 @@ SECRET_KEY = os.environ.get("My_website_security_key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.1.173", "localhost"]
+ALLOWED_HOSTS = ["192.168.1.173", "localhost", "127.0.0.1"]
 
 
 # Application definition
